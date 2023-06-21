@@ -1,0 +1,97 @@
+    {% extends 'includes/base.html' %}
+
+    {% block content %}
+    <div class="container c-bg c-bg__gray-400 pt-5">
+        <div class="row">
+            <div class="col">
+                <a class="c-btn c-btn-primary c-btn-block mb-3" href="{{ url_for('routes.index') }}">Volver al menú</a>
+            </div>
+            <div class="col">
+                <a class="c-btn c-btn-primary c-btn-block mb-3" href="{{ url_for('routes.logout') }}">Salir</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="c-users">
+                    <p class="c-users__title">Formulario de creación de usuario</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form action="{{ url_for('routes.crear_usuario') }}" method="POST">
+                    <fieldset>
+                        <legend>Crear usuario</legend>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nombre de usuario</label>
+                            <input type="text" class="c-form c-form__input" id="username" name="username" placeholder="Nombre de usuario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="c-form c-form__input" id="password" name="password" placeholder="Contraseña" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="perfil" class="form-label">Perfil</label>
+                            <select name="perfil" class="c-form c-form__dropdown" aria-label="Perfil" required>
+                                <option selected disabled>Seleccione un perfil</option>
+                                <option value="vendedor">Vendedor</option>
+                                <option value="administrador">Coordinador</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Valores máximos</legend>
+                        <div class="mb-3">
+                            <label for="maxMoney" class="form-label">Máximo caja</label>
+                            <input type="text" class="c-form c-form__input" id="maxMoney" name="maxMoney" placeholder="Máximo caja">
+                        </div>
+                        <div class="mb-3">
+                            <label for="maxSale" class="form-label">Máximo venta</label>
+                            <input type="text" class="c-form c-form__input" id="maxSale" name="maxSale" placeholder="Máximo venta">
+                        </div>
+                        <div class="mb-3">
+                            <label for="maxCash" class="form-label">Máximo gastos</label>
+                            <input type="text" class="c-form c-form__input" id="maxCash" name="maxCash" placeholder="Máximo gastos">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Parámetros del usuario</legend>
+                        <div class="mb-3">
+                            <label for="maxPays" class="form-label">Máximo cuotas</label>
+                            <input type="text" class="c-form c-form__input" id="maxPays" name="maxPays" placeholder="Máximo cuotas">
+                        </div>
+                        <div class="mb-3">
+                            <label for="maxLoan" class="form-label">Mínimo interés</label>
+                            <input type="text" class="c-form c-form__input" id="maxLoan" name="maxLoan" placeholder="Mínimo interés">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Solicitar Token</legend>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input c-form__checkbox" type="checkbox" value="borrarVentas" id="borrarVentas" name="borrarVentas">
+                                <label class="form-check-label" for="borrarVentas">Borrar ventas</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input c-form__checkbox" type="checkbox" value="modificarPagos" id="modificarPagos" name="modificarPagos" checked>
+                                <label class="form-check-label" for="modificarPagos">Modificar pagos</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Porcentajes de liquidación</legend>
+                        <div class="mb-3">
+                            <label for="comition" class="form-label">Liquidación porcentaje</label>
+                            <input type="text" class="c-form c-form__input" id="comition" name="comition" placeholder="Liquidación porcentaje">
+                        </div>
+                        <div class="mb-3">
+                            <label for="defValue" class="form-label">Valor fijo</label>
+                            <input type="text" class="c-form c-form__input" id="defValue" name="defValue" placeholder="Valor fijo">
+                        </div>
+                    </fieldset>
+                    <button class="c-btn c-btn-primary mb-4" type="submit">Crear Usuario</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'includes/base.html' %}
+
+{% block title %}Inicio de sesión{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-{{ messages[0][1] }}">
+      {{ messages[0][0] }}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+<div class="container c-bg c-bg__gray-400 vh-100 pt-5">
+    <div class="row">
+        <div class="col">
+            <a class="c-btn c-btn-primary c-btn-block mb-3" href="{{ url_for('routes.logout') }}">Salir</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <nav class="c-menu d-flex flex-wrap justify-content-center justify-content-md-start align-items-center h-100">
+                <a href="#" class="c-btn c-btn-primary mb-4"><i class="c-icon c-icon--white bi bi-lock-fill me-3"></i> Manejo de cajas</a>
+                <a href="#" class="c-btn c-btn-primary mb-4"><i class="c-icon c-icon--white bi bi-person-vcard me-3"></i> Morosos</a>
+                <a href="#" class="c-btn c-btn-primary mb-4"><i class="c-icon c-icon--white bi bi-lock me-3"></i> Historial de cajas</a>
+                <a href="#" class="c-btn c-btn-primary mb-4"><i class="c-icon c-icon--white bi bi-shield-fill-exclamation me-3"></i> Cartera</a>
+                <a href="#" class="c-btn c-btn-primary mb-4"><i class="c-icon c-icon--white bi bi-cash-stack me-3"></i> Liquidación de nomina</a>
+                <a href="{{ url_for('routes.crear_usuario') }}" class="c-btn c-btn-primary mb-4"><i class="c-icon c-icon--white bi bi-person-fill me-3"></i> Crear Usuario</a>
+                <a href="{{ url_for('routes.admin_usuarios') }}" class="c-btn c-btn-primary mb-4"><i class="c-icon c-icon--white bi bi-person-fill me-3"></i> ver Usuarios</a>
+
+                <a href="#" class="c-btn c-btn-primary mb-4"><i class="c-icon c-icon--white bi bi-clipboard-data me-3"></i> reporte consolidado</a>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}

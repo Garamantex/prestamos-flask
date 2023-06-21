@@ -1,0 +1,52 @@
+<!-- admin_usuarios.html -->
+
+{% extends '/includes/base.html' %}
+
+{% block content %}
+<div class="container c-bg c-bg__gray-400 pt-5">
+  <div class="row">
+    <div class="col">
+      <a class="c-btn c-btn-primary c-btn-block mb-3" href="{{ url_for('routes.index') }}">Volver al menú</a>
+    </div>
+    <div class="col">
+      <a class="c-btn c-btn-primary c-btn-block mb-3" href="{{ url_for('routes.logout') }}">Salir</a>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Username</th>
+        <th>Rol</th>
+        <th>Max Money</th>
+        <th>Max Sale</th>
+        <th>Max Cash</th>
+        <th>Max Pays</th>
+        <th>Max Loan</th>
+        <th>Comition</th>
+        <th>Def Value</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.max_money }}</td>
+          <td>{{ user.max_sale }}</td>
+          <td>{{ user.max_cash }}</td>
+          <td>{{ user.max_pays }}</td>
+          <td>{{ user.max_loan }}</td>
+          <td>{{ user.comition }}</td>
+          <td>{{ user.def_value }}</td>
+          <td>
+            <a href="{{ url_for('routes.editar_usuario', user_id=user.id) }}" class="btn btn-primary">Editar</a>
+            <a href="{{ url_for('routes.eliminar_usuario', user_id=user.id) }}" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

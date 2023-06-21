@@ -1,0 +1,97 @@
+<!-- editar_usuario.html -->
+
+{% extends '/includes/base.html' %}
+
+{% block content %}
+<div class="container c-bg c-bg__gray-400 pt-5">
+  <div class="row">
+    <div class="col">
+      <a class="c-btn c-btn-primary c-btn-block mb-3" href="{{ url_for('routes.admin_usuarios') }}">Volver al menú</a>
+    </div>
+    <div class="col">
+      <a class="c-btn c-btn-primary c-btn-block mb-3" href="/">Salir</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="c-users">
+        <p class="c-users__title">Formulario de edición de usuario</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <form action="{{ url_for('routes.editar_usuario', user_id=usuario.id) }}" method="POST">
+        <fieldset>
+          <legend>Editar usuario</legend>
+          
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="c-form c-form__input" id="username" name="username" value="{{ usuario.username }}" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="perfil" class="form-label">Rol</label>
+            <select class="c-form c-form__dropdown" id="perfil" name="perfil" required>
+              <option value="administrador" {% if usuario.role == 'administrador' %}selected{% endif %}>Administrador</option>
+              <option value="vendedor" {% if usuario.role == 'vendedor' %}selected{% endif %}>Vendedor</option>
+              <option value="cliente" {% if usuario.role == 'cliente' %}selected{% endif %}>Cliente</option>
+            </select>
+          </div>
+          
+          <div class="mb-3">
+            <label for="max_money" class="form-label">Max Money</label>
+            <input type="number" class="c-form c-form__input" id="max_money" name="max_money" value="{{ usuario.max_money }}" step="0.01" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="max_sale" class="form-label">Max Sale</label>
+            <input type="number" class="c-form c-form__input" id="max_sale" name="max_sale" value="{{ usuario.max_sale }}" step="0.01" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="max_cash" class="form-label">Max Cash</label>
+            <input type="number" class="c-form c-form__input" id="max_cash" name="max_cash" value="{{ usuario.max_cash }}" step="0.01" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="max_pays" class="form-label">Max Pays</label>
+            <input type="number" class="c-form c-form__input" id="max_pays" name="max_pays" value="{{ usuario.max_pays }}" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="max_loan" class="form-label">Max Loan</label>
+            <input type="number" class="c-form c-form__input" id="max_loan" name="max_loan" value="{{ usuario.max_loan }}" required>
+          </div>
+          
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input c-form__checkbox" id="borrar_ventas" name="borrar_ventas" {% if usuario.borrar_ventas %}checked{% endif %}>
+            <label class="form-check-label" for="borrar_ventas">Borrar Ventas</label>
+          </div>
+          
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input c-form__checkbox" id="modificar_pagos" name="modificar_pagos" {% if usuario.modificar_pagos %}checked{% endif %}>
+            <label class="form-check-label" for="modificar_pagos">Modificar Pagos</label>
+          </div>
+          
+          <div class="mb-3">
+            <label for="comition" class="form-label">Comition</label>
+            <input type="number" class="c-form c-form__input" id="comition" name="comition" value="{{ usuario.comition }}" step="0.01" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="def_value" class="form-label">Def Value</label>
+            <input type="number" class="c-form c-form__input" id="def_value" name="def_value" value="{{ usuario.def_value }}" step="0.01" required>
+          </div>
+          
+          <!-- Agrega más campos de formulario según tus necesidades -->
+          
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <a href="{{ url_for('routes.admin_usuarios') }}" class="btn btn-secondary">Cancelar</a>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
