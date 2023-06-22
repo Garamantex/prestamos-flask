@@ -1,0 +1,23 @@
+# Entorno virtual
+venv/
+
+# Archivos de configuración
+instance/
+
+# Archivos de registro
+logs/
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de caché
+*.pyc
+__pycache__/
+
+# Archivos de respaldo
+*.bak
+*.swp
+
+# Archivos de registro de migraciones
+migrations/versions/
