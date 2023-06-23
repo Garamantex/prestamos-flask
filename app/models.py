@@ -1,13 +1,10 @@
-import datetime
-
 from app import db
+import datetime
 
 
 class User(db.Model):
-    """ Modelo de Usuario
+    """ Modelo de Usuario """
 
-    Esta clase representa un modelo de Usuario en la base de datos.
-    """
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
@@ -25,20 +22,19 @@ class User(db.Model):
     modification_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow,
                                   onupdate=datetime.datetime.utcnow)
 
-    user_status = db.relationship('UserStatus')
+    user_status = db.relationship('UserStatus', backref='users')
 
     def __str__(self):
-        """ Representación en forma de cadena del modelo de Usuario."""
         return f"{self.first_name} {self.last_name}"
 
 
 class UserStatus(db.Model):
     """ Modelo de Estado de Usuario """
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
 
     def __str__(self):
-        """ Representación en forma de cadena del modelo de Estado de Usuario."""
         return self.name
 
 
@@ -58,10 +54,9 @@ class Manager(db.Model):
     modification_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow,
                                   onupdate=datetime.datetime.utcnow)
 
-    user = db.relationship('User', backref='manager')
+    user = db.relationship('User', backref='manager', uselist=False)
 
     def __str__(self):
-        """ Representación en forma de cadena del modelo de Gerente."""
         return f"{self.user.first_name} {self.user.last_name}"
 
 
@@ -83,7 +78,7 @@ class Salesman(db.Model):
                                   onupdate=datetime.datetime.utcnow)
 
     user = db.relationship('User', backref='salesman', uselist=False)
-    manager = db.relationship('Manager')
+    manager = db.relationship('Manager', backref='salesmen')
 
     def __str__(self):
         """ Representación en forma de cadena del modelo de Vendedor."""
@@ -91,7 +86,7 @@ class Salesman(db.Model):
 
 
 class Client(db.Model):
-    """ Modelo de Cliente. """
+    """ Modelo de Cliente """
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -100,15 +95,15 @@ class Client(db.Model):
     # loan = db.Column(db.Numeric(10, 2), nullable=False, doc='Préstamo')
     # interest = db.Column(db.Numeric(10, 2), nullable=False, doc='Interés')
     # number_of_payments = db.Column(db.Integer, nullable=False, doc='Número de pagos')
-    # deadline_id = db.Column(db.Integer, db.ForeignKey('deadlines.id'), nullable=False, doc='Plazo')
+    # deadline_id = db.Column(db.Integer, db.ForeignKey('deadlines.id'), nullable=False,
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     modification_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow,
                                   onupdate=datetime.datetime.utcnow)
 
-    user = db.relationship('User', backref='client')
-    salesman = db.relationship('Salesman', backref='client')
-    deadline = db.relationship('Deadlines', backref='client')
+    user = db.relationship('User', backref='client', uselist=False)
 
     def __str__(self):
-        """ Representación en forma de cadena del modelo de Cliente. """
-        return f"{self.user.first_name} {self.user.last_name} Atendido por {self.salesman.first_name} {self.salesman.last_name}"
+        return f"{self.user.first_name} {self.user.last_name}"
+
+
+
